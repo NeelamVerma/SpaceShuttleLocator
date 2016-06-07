@@ -4,6 +4,8 @@ Description:
 
 An app with Google Map view and a space shuttle with continuously updating its location on the Map. When user taps on the shuttle icon it shows the current City Name in callout view.
 
+Google API Key: "AIzaSyBP7GDcZnWvOBCGzczIJ2IuWxoSeXGpqCw"
+Bundle identifier: "com.exilant.spaceShuttle"
 
 # Building SpaceShuttleLocator:
 
