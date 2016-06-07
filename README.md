@@ -39,11 +39,8 @@ $ pod install
 1. Open Project, and then open (double-click) your project's .xcworkspace file to launch Xcode. 
 2. From this time onwards, you must use the .xcworkspace file to open the project.
 
-Step 4: Run the project.
 
-
-
-Features:
+# Features:
 
 - Shows Space shuttle current location.
 - Action button given to animate the Map with shuttle in Callout view's' visible area. (If shuttle goes out of Callout View Visible Area)
