@@ -21,7 +21,7 @@ CocoaPods is an open source dependency manager for Swift and Objective-C Cocoa p
 If you don't already have the CocoaPods tool, install it on OS X by running the following
 command from the terminal. 
 
-$ sudo gem install cocoapods
+- $ sudo gem install cocoapods
 
 For details, see the "https://guides.cocoapods.org/using/getting-started.html".
 The Google Maps SDK for iOS is available as a CocoaPods pod. 
@@ -29,10 +29,12 @@ The Google Maps SDK for iOS is available as a CocoaPods pod.
 Step 3: Install the Google SDK using CocoaPods
 
 1. Open a terminal and go to the directory containing the Podfile:
-$ cd <path-to-project>
+
+- $ cd <path-to-project>
 
 2. Run the pod install command. This will install the APIs specified in the Podfile, along with any dependencies they may have.
-$ pod install
+
+- $ pod install
 
 3. Close Xcode
 
