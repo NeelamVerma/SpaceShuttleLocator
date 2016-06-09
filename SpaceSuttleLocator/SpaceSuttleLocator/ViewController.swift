@@ -13,9 +13,6 @@ class ViewController: UIViewController,GMSMapViewDelegate {
     
     @IBOutlet weak var spaceLocatorMap: GMSMapView!
     
-    // Animating the mapview to the current spaceshuttle position for first time.
-    var isStarted : Bool = false
-    
     // Shuttle Icon Marker
     let marker = GMSMarker()
     
@@ -64,7 +61,7 @@ class ViewController: UIViewController,GMSMapViewDelegate {
     
     //MARK: Locating the Space Shuttle
     func locateSpaceShuttle()  {
-        SSLWebServices.sharedInstance.getCordinatesOfShuttle { (cordinate,error) in
+        SSLWebServices.getCordinatesOfShuttle { (cordinate,error) in
             
             dispatch_async(dispatch_get_main_queue()) {
                 
@@ -72,21 +69,20 @@ class ViewController: UIViewController,GMSMapViewDelegate {
                 {
                     if let locationerror = error
                     {
-                        if locationerror.localizedFailureReason != nil
+                        if let errorDescription = locationerror.localizedFailureReason
                         {
-                            SSLUtility.sharedInstance.showAlert(Constant.Others.Error, messageStr: locationerror.localizedFailureReason!, preferredStyle: UIAlertControllerStyle.Alert, target: self, onActionhandler: nil)
+                            SSLUtility.showAlert(Constant.Others.Error, messageStr: errorDescription, preferredStyle: UIAlertControllerStyle.Alert, target: self, onActionhandler: nil)
                         }
                     }
                     return
                 }
                 
-                
-                self.marker.position = cordinate!
-                if self.isStarted == false
+                if let spaceShuttleCordinate = cordinate
                 {
-                    self.spaceLocatorMap.animateToLocation(self.marker.position)
+                    self.marker.position = spaceShuttleCordinate
                 }
-                self.isStarted = true
+                
+                self.spaceLocatorMap.animateToLocation(self.marker.position)
                 
             }
         }
@@ -96,7 +92,7 @@ class ViewController: UIViewController,GMSMapViewDelegate {
     //MARK: Google Map Delegate - Tap on Marker Icon
     func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool
     {
-        SSLWebServices.sharedInstance.getCurrentCityNameForSpaceShuttle(marker.position) { (cityName, error) in
+        SSLWebServices.getCurrentCityNameForSpaceShuttle(marker.position) { (cityName, error) in
             
             dispatch_async(dispatch_get_main_queue()) {
                 
@@ -104,9 +100,9 @@ class ViewController: UIViewController,GMSMapViewDelegate {
                 {
                     if let locationerror = error
                     {
-                        if locationerror.localizedFailureReason != nil
+                        if let errorDescription = locationerror.localizedFailureReason
                         {
-                            SSLUtility.sharedInstance.showAlert(Constant.Others.Error, messageStr: locationerror.localizedFailureReason!, preferredStyle: UIAlertControllerStyle.Alert, target: self, onActionhandler: nil)
+                            SSLUtility.showAlert(Constant.Others.Error, messageStr: errorDescription, preferredStyle: UIAlertControllerStyle.Alert, target: self, onActionhandler: nil)
                         }
                     }
                     else
@@ -117,24 +113,16 @@ class ViewController: UIViewController,GMSMapViewDelegate {
                     return
                 }
                 
-                marker.title = cityName! as String
+                if let currentCityName = cityName
+                {
+                    marker.title = currentCityName as String
+                }
                 self.spaceLocatorMap.selectedMarker = marker
                 
             }
         }
         
         return true
-    }
-    
-    //MARK: Action for relocating the map to marker positon
-    @IBAction func reLocateMapviewToShuttlePosition(sender: AnyObject) {
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            
-            self.spaceLocatorMap.animateToLocation(self.marker.position)
-            
-        }
-        
     }
 }
 

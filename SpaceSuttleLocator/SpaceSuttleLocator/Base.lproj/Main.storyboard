@@ -21,22 +21,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNE-c8-gls">
-                                <rect key="frame" x="288" y="544" width="24" height="24"/>
-                                <state key="normal" image="reLocateMapviewImage"/>
-                                <connections>
-                                    <action selector="reLocateMapviewToShuttlePosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="djh-ke-Rai"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CNE-c8-gls" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KAp-Si-QTl"/>
                             <constraint firstItem="Rog-Gj-FOp" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="NgO-WB-S7Z"/>
                             <constraint firstItem="Rog-Gj-FOp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="knS-rp-VqD"/>
                             <constraint firstItem="Rog-Gj-FOp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="nJf-3l-s8L"/>
                             <constraint firstItem="Rog-Gj-FOp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vgM-Mi-vRk"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="CNE-c8-gls" secondAttribute="bottom" constant="32" id="xRP-vo-Usw"/>
                         </constraints>
                     </view>
                     <connections>
@@ -48,7 +39,4 @@
             <point key="canvasLocation" x="269" y="297"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="reLocateMapviewImage" width="24" height="24"/>
-    </resources>
 </document>

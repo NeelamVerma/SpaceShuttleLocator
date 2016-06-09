@@ -12,51 +12,46 @@ import GoogleMaps
 
 class SSLWebServices: NSObject {
     
-    //MARK: Shared Instance
-    class var sharedInstance: SSLWebServices {
-        
-        struct Static {
-            static var onceToken: dispatch_once_t = 0
-            static var instance: SSLWebServices? = nil
-        }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = SSLWebServices()
-        }
-        return Static.instance!
-    }
-    
-    private override init() {
-        
-    }
-    
 
     //MARK: Common API for GET Results
-    func getResults(fetchURL: String, completionHandler: (NSData?, NSError?) -> ()) -> NSURLSessionTask {
+    static func getResults(fetchURL: String, completionHandler: (NSData?, NSError?) -> ()) {
         
-        let sslURL = NSURL(string: fetchURL)!;
-        let request = NSMutableURLRequest(URL:sslURL);
-        request.HTTPMethod = Constant.HttpMethod.GET;
+        let sslURL = NSURL(string: fetchURL)
+        var request : NSMutableURLRequest?
+        var task : NSURLSessionTask?
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-            
-            dispatch_async(dispatch_get_main_queue()) {
+        if let spaceShuttleURL = sslURL
+        {
+            request = NSMutableURLRequest(URL:spaceShuttleURL)
+        }
+        
+        if let fetchRequest = request
+        {
+            fetchRequest.HTTPMethod = Constant.HttpMethod.GET
+            task = NSURLSession.sharedSession().dataTaskWithRequest(fetchRequest) { data, response, error in
                 
-                guard data != nil else {
-                    completionHandler(nil, error)
-                    return
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    guard data != nil else {
+                        completionHandler(nil, error)
+                        return
+                    }
+                    completionHandler(data, nil)
+                    
                 }
-                completionHandler(data, nil)
-                
+            }
+            
+            if let resultTask = task
+            {
+                resultTask.resume()
             }
         }
         
-        task.resume()
-        return task
     }
     
     
     //MARK: Get Cordinates Of Shuttle
-    func getCordinatesOfShuttle(completionhandler:((CLLocationCoordinate2D?,NSError?) -> Void)) {
+    static func getCordinatesOfShuttle(completionhandler:((CLLocationCoordinate2D?,NSError?) -> Void)) {
         
         getResults(Constant.Path.SpaceShuttlePath) { (data, error) in
             
@@ -67,12 +62,21 @@ class SSLWebServices: NSObject {
             
             do
             {
-                if let responseData : NSDictionary = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+                if let cordinateData = data
                 {
-                    let positinDict = responseData.valueForKey(Constant.MapConstants.Position) as! NSDictionary
-                    let cordinate =  CLLocationCoordinate2D.init(latitude: positinDict.valueForKey(Constant.MapConstants.SpaceShuttlelatitude) as! CLLocationDegrees, longitude: positinDict.valueForKey(Constant.MapConstants.SpaceShuttlelongitude) as! CLLocationDegrees)
-                    completionhandler(cordinate,nil)
+                    if let responseData : NSDictionary = try NSJSONSerialization.JSONObjectWithData(cordinateData, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+                    {
+                        if let positinDict = responseData.valueForKey(Constant.MapConstants.Position) as? NSDictionary
+                        {
+                            if let lattitude = positinDict.valueForKey(Constant.MapConstants.SpaceShuttlelatitude) as? CLLocationDegrees, logitude = positinDict.valueForKey(Constant.MapConstants.SpaceShuttlelongitude) as? CLLocationDegrees
+                            {
+                                let cordinate =  CLLocationCoordinate2D.init(latitude: lattitude, longitude: logitude)
+                                completionhandler(cordinate,nil)
+                            }
+                        }
+                    }
                 }
+                
             }
             catch let responseDataError as NSError {
                 
@@ -84,7 +88,7 @@ class SSLWebServices: NSObject {
     }
     
     //MARK: Get Current City Name For Space Shuttle
-    func getCurrentCityNameForSpaceShuttle(cordinates : CLLocationCoordinate2D , completionhandler:((String?,NSError?) -> Void)) {
+    static func getCurrentCityNameForSpaceShuttle(cordinates : CLLocationCoordinate2D , completionhandler:((String?,NSError?) -> Void)) {
         
         let geoCoder = GMSGeocoder()
         // GMSReverseGeocodeResponse
@@ -96,16 +100,19 @@ class SSLWebServices: NSObject {
                 return
             }
 
-            if let address = response!.firstResult()
+            if let dataResponse = response
             {
-                if let administrativeArea = address.administrativeArea, country = address.country
+                if let address = dataResponse.firstResult()
                 {
-                    let area =  administrativeArea + ", " + country
-                    completionhandler(area,nil)
-                }
-                else if let country = address.country
-                {
-                    completionhandler(country,nil)
+                    if let administrativeArea = address.administrativeArea, country = address.country
+                    {
+                        let area =  administrativeArea + ", " + country
+                        completionhandler(area,nil)
+                    }
+                    else if let country = address.country
+                    {
+                        completionhandler(country,nil)
+                    }
                 }
             }
             

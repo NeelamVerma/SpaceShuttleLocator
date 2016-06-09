@@ -14,7 +14,6 @@
 		794E162F1D02AC7300F29CDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794E162E1D02AC7300F29CDA /* AppDelegate.swift */; };
 		794E16311D02AC7300F29CDA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794E16301D02AC7300F29CDA /* ViewController.swift */; };
 		794E16341D02AC7300F29CDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 794E16321D02AC7300F29CDA /* Main.storyboard */; };
-		794E16371D02AC7300F29CDA /* SpaceSuttleLocator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 794E16351D02AC7300F29CDA /* SpaceSuttleLocator.xcdatamodeld */; };
 		794E16391D02AC7300F29CDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794E16381D02AC7300F29CDA /* Assets.xcassets */; };
 		794E163C1D02AC7300F29CDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 794E163A1D02AC7300F29CDA /* LaunchScreen.storyboard */; };
 		794E16471D02AC7300F29CDA /* SpaceSuttleLocatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794E16461D02AC7300F29CDA /* SpaceSuttleLocatorTests.swift */; };
@@ -48,7 +47,6 @@
 		794E162E1D02AC7300F29CDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		794E16301D02AC7300F29CDA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		794E16331D02AC7300F29CDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		794E16361D02AC7300F29CDA /* SpaceSuttleLocator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SpaceSuttleLocator.xcdatamodel; sourceTree = "<group>"; };
 		794E16381D02AC7300F29CDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		794E163B1D02AC7300F29CDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		794E163D1D02AC7300F29CDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 				794E16381D02AC7300F29CDA /* Assets.xcassets */,
 				794E163A1D02AC7300F29CDA /* LaunchScreen.storyboard */,
 				794E163D1D02AC7300F29CDA /* Info.plist */,
-				794E16351D02AC7300F29CDA /* SpaceSuttleLocator.xcdatamodeld */,
 			);
 			path = SpaceSuttleLocator;
 			sourceTree = "<group>";
@@ -347,7 +344,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				794E16311D02AC7300F29CDA /* ViewController.swift in Sources */,
-				794E16371D02AC7300F29CDA /* SpaceSuttleLocator.xcdatamodeld in Sources */,
 				792A16211D056E6B00F7A59F /* SSLConstants.swift in Sources */,
 				792A161F1D05306900F7A59F /* SSLUtility.swift in Sources */,
 				794E162F1D02AC7300F29CDA /* AppDelegate.swift in Sources */,
@@ -621,19 +617,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		794E16351D02AC7300F29CDA /* SpaceSuttleLocator.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				794E16361D02AC7300F29CDA /* SpaceSuttleLocator.xcdatamodel */,
-			);
-			currentVersion = 794E16361D02AC7300F29CDA /* SpaceSuttleLocator.xcdatamodel */;
-			path = SpaceSuttleLocator.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 794E16231D02AC7200F29CDA /* Project object */;
 }
